@@ -57,7 +57,6 @@ tl.to(heroFrame, {
 window.addEventListener('scroll', () => {
     const isScrolled = window.scrollY > 500;
 
-    // Toggle Floating Contact visibility
     if (isScrolled) {
         floatingContact.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
         floatingContact.classList.add('opacity-100', 'translate-y-0');
@@ -66,12 +65,10 @@ window.addEventListener('scroll', () => {
         floatingContact.classList.remove('opacity-100', 'translate-y-0');
     }
 
-    // Secondary Navbar behavior (Hiding header after a certain point)
     if (isScrolled) {
         mainHeader.classList.add('opacity-0', '-translate-y-full', 'pointer-events-none');
         mainHeader.classList.remove('opacity-100', 'translate-y-0');
     } else {
-        // Only bring it back if GSAP timeline isn't controlling it (optional logic)
         if (window.scrollY < 100) {
             mainHeader.classList.remove('opacity-0', '-translate-y-full', 'pointer-events-none');
             mainHeader.classList.add('opacity-100', 'translate-y-0');
@@ -79,7 +76,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Fullscreen Menu Logic
+// Fullscreen 
 menuBtn.addEventListener('click', () => {
     fullMenu.classList.remove('-translate-y-full');
 });
@@ -89,7 +86,7 @@ menuClose.addEventListener('click', () => {
 });
 
 
-// Description Section Animation
+// Description 
 const descriptionSection = document.querySelector('#description-section');
 
 if (descriptionSection) {
@@ -100,19 +97,17 @@ if (descriptionSection) {
         ease: "power3.out",
         scrollTrigger: {
             trigger: descriptionSection,
-            start: "top 80%", // Triggers when the top of the section hits 80% of the viewport height
-            once: true,       // Animation only plays once
+            start: "top 80%", 
+            once: true,       
         }
     });
 }
 
-// Ensure Hero Video Path is correct
 const heroVideoSource = document.querySelector('#hero-video source');
 if (heroVideoSource) {
     heroVideoSource.src = "videos/video-cuisiniste-lyon-italian-kitchen.mp4";
 }
 
-// Interaction Logic for Projects
 const thumbs = document.querySelectorAll('.project-thumb');
 const activeImg = document.querySelector('#active-project-img');
 
@@ -120,7 +115,6 @@ thumbs.forEach((thumb) => {
     thumb.addEventListener('mouseenter', () => {
         const newSrc = thumb.getAttribute('data-big');
         
-        // 1. Handle Big Image Change
         if (activeImg.src !== newSrc) {
             activeImg.src = newSrc;
             gsap.fromTo("#big-img-container", 
@@ -129,15 +123,13 @@ thumbs.forEach((thumb) => {
             );
         }
 
-        // 2. Handle Underline Indicators (The Missing Part)
         thumbs.forEach((t) => {
             const indicator = t.querySelector('.indicator');
-            // Reset all indicators to hidden
+            // Reset
             indicator.classList.remove('w-full', 'opacity-100');
             indicator.classList.add('w-0', 'opacity-0');
         });
 
-        // Set the current hovered thumb indicator to visible
         const currentIndicator = thumb.querySelector('.indicator');
         currentIndicator.classList.remove('w-0', 'opacity-0');
         currentIndicator.classList.add('w-full', 'opacity-100');
@@ -168,7 +160,7 @@ thumbs2.forEach((thumb) => {
         const newSrc = thumb.getAttribute('data-big');
         const indicator = thumb.querySelector('.indicator');
 
-        // Update Big Image with Fade/Scale effect
+        // Big image
         if (activeImg2.getAttribute('src') !== newSrc) {
             activeImg2.setAttribute('src', newSrc);
             gsap.fromTo(bigImgContainer2, 
@@ -177,7 +169,6 @@ thumbs2.forEach((thumb) => {
             );
         }
 
-        // Manage Red Underline Indicators for Section 2
         thumbs2.forEach(t => {
             const ind = t.querySelector('.indicator');
             ind.classList.remove('w-full', 'opacity-100');
