@@ -1,4 +1,4 @@
-// 1. Initialize Lenis (Smooth Scroll)
+// Initialize Lenis (Smooth Scroll)
 const lenis = new Lenis();
 function raf(time) {
     lenis.raf(time);
