@@ -6,7 +6,6 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
-// 2. Register GSAP Plugins
 gsap.registerPlugin(ScrollTrigger);
 
 // Elements
@@ -19,7 +18,7 @@ const menuBtn = document.querySelector('#menu-toggle');
 const menuClose = document.querySelector('#menu-close');
 const fullMenu = document.querySelector('#full-menu');
 
-// 3. Landing Page Animation (Scale down and Fade Header)
+// Landing Page Animation (Scale down and Fade Header)
 const isMobile = window.innerWidth < 768;
 const scrollEnd = isMobile ? "+=700" : "+=1200";
 
@@ -34,7 +33,7 @@ const tl = gsap.timeline({
     }
 });
 
-// Phase 1: Fade Navbar
+//  Fade Navbar
 tl.to(mainHeader, {
     autoAlpha: 0,
     y: -12,
@@ -47,14 +46,14 @@ tl.call(() => {
     heroVideo.play().catch(() => {});
 }, [], 0.1);
 
-// Phase 2: Scale down video frame
+// Scale down video frame
 tl.to(heroFrame, {
     scale: 0.78,
     duration: 2,
     ease: "none"
 }, 0.2);
 
-// 4. Scroll Logic (Navbar Hide & Floating Button)
+//  Scroll Logic (Navbar Hide & Floating Button)
 window.addEventListener('scroll', () => {
     const isScrolled = window.scrollY > 500;
 
@@ -80,7 +79,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// 5. Fullscreen Menu Logic
+// Fullscreen Menu Logic
 menuBtn.addEventListener('click', () => {
     fullMenu.classList.remove('-translate-y-full');
 });
@@ -90,7 +89,7 @@ menuClose.addEventListener('click', () => {
 });
 
 
-// 6. Description Section Animation
+// Description Section Animation
 const descriptionSection = document.querySelector('#description-section');
 
 if (descriptionSection) {
@@ -145,12 +144,12 @@ thumbs.forEach((thumb) => {
     });
 });
 
-// 8. Second Projects Section Logic (Reverse)
+// Second Projects  (Reverse)
 const activeImg2 = document.querySelector('#active-project-img-2');
 const bigImgContainer2 = document.querySelector('#big-img-container-2');
 const thumbs2 = document.querySelectorAll('.project-thumb-2');
 
-// Entrance Animation for Section 2
+
 gsap.from("#projects-section-2 .project-item", {
     opacity: 0,
     y: 40,
@@ -163,7 +162,7 @@ gsap.from("#projects-section-2 .project-item", {
     },
 });
 
-// Hover Interaction for Section 2 Thumbnails
+
 thumbs2.forEach((thumb) => {
     thumb.addEventListener('mouseenter', () => {
         const newSrc = thumb.getAttribute('data-big');
@@ -189,7 +188,7 @@ thumbs2.forEach((thumb) => {
     });
 });
 
-// Reset Section 2 to first image on mouse leave
+// Reset  on mouse leave
 document.querySelector('#project-grid-2').addEventListener('mouseleave', () => {
     const firstImg = thumbs2[0].getAttribute('data-big');
     activeImg2.setAttribute('src', firstImg);
@@ -207,21 +206,20 @@ document.querySelector('#project-grid-2').addEventListener('mouseleave', () => {
 });
 
 
-// 9. All Our Achievements Link Logic
+//  All Our Achievements 
 const achievementsLink = document.querySelector('#achievements-link');
 const underline = document.querySelector('#achievement-underline');
 
 if (achievementsLink && underline) {
     achievementsLink.addEventListener('mouseenter', () => {
-        // Kill any existing animations on the underline to prevent conflicts
         gsap.killTweensOf(underline);
     });
 
     achievementsLink.addEventListener('mouseleave', () => {
         gsap.killTweensOf(underline);
-        // The React component resets the underline scale on leave
+      
         gsap.to(underline, {
-            scaleX: 1, // Resetting to full width to match initial state
+            scaleX: 1, 
             duration: 0.25,
             ease: "power2.out",
             transformOrigin: "left center"
@@ -230,7 +228,7 @@ if (achievementsLink && underline) {
 }
 
 
-// 10. Carousel Logic
+//  Carousel
 const newsSlides = [
     { image: "projects/project1.jpg", title: "Atmosphère Minérale", subtitle: "Cuisine en pierre naturelle" },
     { image: "projects/project2.jpg", title: "Design Italien", subtitle: "L'élégance du sur-mesure" },
@@ -257,13 +255,11 @@ function goNext() {
     const nextIdx = (activeIdx + 1) % newsSlides.length;
     updateSlideContent(nextSlideEl, newsSlides[nextIdx]);
 
-    // GSAP Transition
     gsap.set(nextSlideEl, { xPercent: 15, opacity: 0 }); 
     
     const tl = gsap.timeline({
         onComplete: () => {
             activeIdx = nextIdx;
-            // Transfer "next" state to "current"
             updateSlideContent(currSlideEl, newsSlides[activeIdx]);
             gsap.set(currSlideEl, { xPercent: 0, opacity: 1 });
             gsap.set(nextSlideEl, { opacity: 0, xPercent: 0 });
@@ -279,17 +275,15 @@ if (carouselNextBtn) {
     carouselNextBtn.addEventListener('click', goNext);
 }
 
-// Initial Load
 if (newsSlides.length > 0) {
     updateSlideContent(currSlideEl, newsSlides[0]);
 }
 
-// 11. Series Section Animations
+// Series 
 const seriesTitle = document.querySelector('#series-title');
 const seriesItems = document.querySelectorAll('.series-item');
 
 if (seriesTitle) {
-    // Animate Title
     gsap.to(seriesTitle, {
         opacity: 1,
         y: 0,
@@ -303,7 +297,7 @@ if (seriesTitle) {
 }
 
 if (seriesItems.length > 0) {
-    // Animate Grid Items with Stagger
+    
     gsap.to(seriesItems, {
         opacity: 1,
         y: 0,
@@ -319,7 +313,7 @@ if (seriesItems.length > 0) {
 }
 
 
-// 12. Brands Grid Entrance Animation
+//Brands 
 const brandsSection = document.querySelector('#brands-section');
 
 if (brandsSection) {
@@ -336,7 +330,7 @@ if (brandsSection) {
     });
 }
 
-// 13. Process Section Animation
+// process 
 const processSection = document.querySelector('#process-section');
 if (processSection) {
     const rows = document.querySelectorAll('.process-row');
